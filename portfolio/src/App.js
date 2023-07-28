@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import CardEditor from './components/CardEditor';
+import CardPreview from './components/CardPreview';
 
-function App() {
+const App = () => {
+  const [cardTitle, setCardTitle] = useState('');
+  const [cardMessage, setCardMessage] = useState('');
+
+  const handleTitleChange = (event) => {
+    setCardTitle(event.target.value);
+  };
+
+  const handleMessageChange = (event) => {
+    setCardMessage(event.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <div className="container">
+        <CardEditor
+          cardTitle={cardTitle}
+          cardMessage={cardMessage}
+          onTitleChange={handleTitleChange}
+          onMessageChange={handleMessageChange}
+        />
+        <CardPreview cardTitle={cardTitle} cardMessage={cardMessage} />
+      </div>
+      {/* Add CardSettings component here if desired */}
     </div>
   );
-}
+};
 
 export default App;
